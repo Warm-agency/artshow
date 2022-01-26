@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="container" style="width: 100%; display: flex; justify-content: center; align-items: center;">
+            <div class="wrapper" style="display: flex; align-items: center; height: 100vh">
+                <div class="window" style="width: 800px; height: 400px; overflow: hidden; position: relative; border: 1px solid grey">
+
+                </div>
+            </div>
+        </div>
+        <script type="module">
+            import { sketches } from './sketches.js'
+            const typical = sketches[0].image
+            const window = document.getElementsByClassName('window')[0]
+            const frame = document.createElement('img')
+            window.appendChild(frame)
+            let x = 20
+            let y = 20
+            frame.src = typical
+            frame.style.width = '150px'
+            frame.style.position = 'absolute'
+            frame.style.left = `${x}%`
+            frame.style.top = `${y}%`
+
+            function moveLeft(){
+                x -= 5
+                frame.style.left = `${x}px`
+                if (x < -150){
+                    x = 800
+                }
+                setTimeout(moveLeft, 80)
+            }
+
+            moveLeft()
+            
+        </script>
+    </body>
+</html>

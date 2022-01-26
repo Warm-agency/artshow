@@ -1,0 +1,3 @@
+- Images are displayed in the center
+- Images keep sliding, if mouse is hovered to any image, it stops sliding
+- If an image is clicked on, image will be zoomed out
