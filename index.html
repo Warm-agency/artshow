@@ -13,28 +13,43 @@
         </div>
         <script type="module">
             import { sketches } from './sketches.js'
-            const typical = sketches[0].image
+        
             const window = document.getElementsByClassName('window')[0]
-            const frame = document.createElement('img')
-            window.appendChild(frame)
             let x = 20
-            let y = 20
-            frame.src = typical
-            frame.style.width = '150px'
-            frame.style.position = 'absolute'
-            frame.style.left = `${x}%`
-            frame.style.top = `${y}%`
+            let y = 30
+            let w = 150
+
+            let images = []
 
             function moveLeft(){
                 x -= 5
-                frame.style.left = `${x}px`
+                for (let i = 0; i < images.length; i++){
+                    images[i].style.left = `${x + i*w + 50}px`
+                }
                 if (x < -150){
                     x = 800
                 }
                 setTimeout(moveLeft, 80)
             }
 
+            
+
+            for (let j = 0; j < sketches.length; j++){
+                let image = sketches[j].image
+                let imageContainer = document.createElement('img')
+                window.appendChild(imageContainer)
+                imageContainer.src = image
+                imageContainer.style.width = `${w}px`
+                imageContainer.style.position = 'absolute'
+                imageContainer.style.left = `${x + j*w + 50}px`
+                imageContainer.style.top = `${y}%`
+                images.push(imageContainer)
+                
+            }
+
             moveLeft()
+
+
             
         </script>
     </body>
