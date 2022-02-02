@@ -15,23 +15,37 @@
             import { sketches } from './sketches.js'
         
             const window = document.getElementsByClassName('window')[0]
+            window.addEventListener('mouseover', handleMouseOver)
+            window.addEventListener('mouseleave', handleMouseLeave)
             let x = 20
             let y = 30
             let w = 150
+            let hovered = false
 
             let images = []
 
             function moveLeft(){
                 x -= 5
                 for (let i = 0; i < images.length; i++){
-                    images[i].style.left = `${x + i*w + 50}px`
+                    images[i].style.left = `${x + i*w}px`
                 }
-                if (x < -150){
+                if (x < 0){
                     x = 800
                 }
-                setTimeout(moveLeft, 80)
+
+                if (!hovered){
+                    setTimeout(moveLeft, 80)
+                }
             }
 
+            function handleMouseOver(){
+                hovered = true
+            }
+
+            function handleMouseLeave(){
+                hovered = false
+                moveLeft()
+            }
             
 
             for (let j = 0; j < sketches.length; j++){
@@ -41,7 +55,7 @@
                 imageContainer.src = image
                 imageContainer.style.width = `${w}px`
                 imageContainer.style.position = 'absolute'
-                imageContainer.style.left = `${x + j*w + 50}px`
+                imageContainer.style.left = `${x + j*w }px`
                 imageContainer.style.top = `${y}%`
                 images.push(imageContainer)
                 
